@@ -1,27 +1,45 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Recommend from '../views/Recommend.vue'
+import Hot from '../views/Hot.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
-    name: 'Home',
-    component: Home
+    path: '/',//路由默认匹配首页
+    name: 'Recommend',
+    component: Recommend,
+    meta:{showNav:true}
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    path: '/hot',//路由默认匹配首页
+    name: 'Hot',
+    component: Hot,
+    meta:{showNav:true}
+  },
+  {
+    path: '/hot/:num',//路由默认匹配首页
+    name: 'Hot',
+    component:()=> import('../views/Hot'),
+    meta:{showNav:true}
+  },
+  {
+    path: '/search',
+    name: 'Search',
+    component: () => import('../views/Search.vue'),
+    meta:{showNav:true}
+  },
+  {
+    path: '/musiclist/:musicid',
+    name: 'MusicList',
+    component: () => import('../views/MusicList'),
+    meta:{showNav:false}
   }
 ]
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: 'hash',
   base: process.env.BASE_URL,
   routes
 })

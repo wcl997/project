@@ -1,14 +1,43 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+  <div id="app" style='padding-bottom:50px;'>
+    <!-- <Loading /> -->
+    <!-- <Download></Download> -->
+    <TopNav v-show="$route.meta.showNav"></TopNav>
+    <div >
+      <!-- :style="{
+      paddingTop:'40px',
+    }" -->
+      <keep-alive>
+        <router-view @playMusic='playMusic'/>
+      </keep-alive>
     </div>
-    <router-view/>
+      <Play :musicID='$root.playingMusic.musicID'
+            
+            ></Play>
   </div>
 </template>
 
+<script>
+  import TopNav from "./components/TopNav"
+  import Play from './components/Play'
+  // import Loading from './components/Loading'
+  // import Download from './components/Download'
+  export default {
+    methods: {
+      playMusic(id){
+        this.musicID=id
+      }
+    },
+    components:{
+      TopNav,
+      Play
+      // Download
+      // Loading
+    }
+  }
+</script>
 <style>
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
